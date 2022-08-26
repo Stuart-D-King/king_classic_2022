@@ -371,7 +371,7 @@ class PlayGolf(object):
         # Specify the service
         s3 = boto3.resource('s3')
         write_name = f_name.replace('_','-')
-        s3.Bucket('king-classic-2021').upload_file(f_name, write_name)
+        s3.Bucket('king-classic-2022').upload_file(f_name, write_name)
 
 
     def add_player(self, name, hdcp, tees, skins=True):
