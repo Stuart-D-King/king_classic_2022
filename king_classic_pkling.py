@@ -682,7 +682,7 @@ if __name__ == '__main__':
         # 'The National - Cove/Ridge': 'One',
         # 'The National - Cove/Bluff': 'Two',
         'The Oconee': 'Two',
-        'Great Waters': 'One'
+        'Great Waters': 'One',
         'The Landing': 'One',
         'The Landing Replay': 'One',
         'Great Waters Replay': 'One'
