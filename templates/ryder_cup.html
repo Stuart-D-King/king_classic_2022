@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>King Classic: Ryder Cup</title>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+		<meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+  <body>
+		<h2>Ryder Cup Results</h2>
+		<h4>{{result_str|safe}}</h4>
+		<h4>Points</h4>
+		<div>
+			<table>
+				<tr>
+					<th>Team 1</th>
+					<th>Team 2</th>
+				</tr>
+				<tr>
+					<td>{{team1_pts|safe}}</td>
+					<td>{{team2_pts|safe}}</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+    <h4>Day 1 Results - The Oconee</h4>
+    <p>{{df_day1|safe}}</p>
+		<br>
+    <h4>Day 2 Results - The Landing</h4>
+    <p>{{df_day2|safe}}</p>
+		<br>
+    <h4><a href="{{ url_for('index') }}">Home</a></h4>
+  </body>
+</html>

@@ -234,36 +234,28 @@ def teams():
                 request.form['t2p1'],
                 request.form['t3p1'],
                 request.form['t4p1'],
-                request.form['t5p1']]
+                request.form['t5p1'],
+                request.form['t6p1']]
 
         p2 = [request.form['t1p2'],
                 request.form['t2p2'],
                 request.form['t3p2'],
                 request.form['t4p2'],
-                request.form['t5p2']]
-
-        p3 = [request.form['t1p3'],
-                request.form['t2p3'],
-                request.form['t3p3'],
-                request.form['t4p3'],
-                request.form['t5p3']]
+                request.form['t5p2'],
+                request.form['t6p2']]
 
         p1 = [golfer for golfer in p1 if golfer != 'None']
         p2 = [golfer for golfer in p2 if golfer != 'None']
-        p3 = [golfer for golfer in p3 if golfer != 'None']
 
-        lsts = [p1, p2, p3]
-        it = iter(lsts)
-        the_len = len(next(it))
-        if not all(len(l) == the_len for l in it):
-             msg = 'Teams not properly defined. Please try again.'
-             return render_template('teams.html', players=players, msg=msg)
+        if len(p1) != len(p2):
+            msg = 'Teams not properly defined. Please try again.'
+            return render_template('teams.html', players=players, msg=msg)
 
         # if len(p1) != len(p2):
         #     msg = 'Teams not properly defined. Please try again.'
         #     return render_template('teams.html', players=players, msg=msg)
 
-        golfers = list(zip(p1,p2,p3))
+        golfers = list(zip(p1,p2))
         teams_df = golf.calc_teams(golfers, course)
         return render_template('teams_results.html', teams_df=teams_df.to_html(index=False), course=course)
 
@@ -282,6 +274,13 @@ def tees_handicaps():
         return render_template('tees_handicaps.html', hdcps_df=hdcps_df.to_html(index=False), course=course)
 
     return render_template('tees_handicaps.html')
+
+
+# ryder cup page
+@app.route('/ryder_cup', methods=['GET'])
+def ryder_cup():
+    df_day1, df_day2, team1_pts, team2_pts, result_str = golf.calc_ryder_cup()
+    return render_template('ryder_cup.html', df_day1=df_day1.to_html(index=False), df_day2=df_day2.to_html(index=False), team1_pts=team1_pts, team2_pts=team2_pts, result_str=result_str)
 
 
 if __name__ == '__main__':

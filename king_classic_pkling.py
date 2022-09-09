@@ -360,6 +360,8 @@ class PlayGolf(object):
             }
         }
         self.pkl_path = 'pkl_files/'
+        self.rc_team1_pts = 0
+        self.rc_team2_pts = 0
 
 
     def to_bucket(self, f_name):
@@ -384,7 +386,7 @@ class PlayGolf(object):
             with open(f_name, 'wb') as f:
                 pickle.dump(golfer, f)
 
-            self.to_bucket(f_name)
+            # self.to_bucket(f_name)
 
 
     def add_score(self, player, course, hole, score):
@@ -398,7 +400,7 @@ class PlayGolf(object):
         with open(f_name, 'wb') as f:
             pickle.dump(golfer, f)
 
-        self.to_bucket(f_name)
+        # self.to_bucket(f_name)
 
 
     def show_player_course_score(self, player, course, net=False):
@@ -669,6 +671,193 @@ class PlayGolf(object):
         return df_hdcps
 
 
+    def calc_ryder_cup(self):
+        allfiles = [f for f in listdir(self.pkl_path) if isfile(join(self.pkl_path, f))]
+        golfers = []
+        for pf in allfiles:
+            with open('{}'.format(self.pkl_path) + pf, 'rb') as f:
+                golfers.append(pickle.load(f))
+
+        players = [golfer for golfer in golfers]
+        names = [golfer.name for golfer in golfers]
+        dct = dict(zip(names, golfers))
+
+        matchups1 = [('Alex King', 'Stuart King'),
+                 ('Jeff Veness', 'Zach Taylor'),
+                 ('Jerry King', 'Josh Duckett'),
+                 ('Reggie Sherrill', 'Bobby Jovanov'),
+                 ('Rob Matiko', 'Andy Tapper'),
+                 ('Chris Marsh', 'Patrick Hannahan')]
+
+        matchups2 = [('Jerry King', 'Stuart King'),
+                 ('Alex King', 'Andy Tapper'),
+                 ('Chris Marsh', 'Bobby Jovanov'),
+                 ('Rob Matiko', 'Zach Taylor'),
+                 ('Reggie Sherrill', 'Patrick Hannahan'),
+                 ('Jeff Veness', 'Josh Duckett')]
+
+        team1_pts = 0
+        team2_pts = 0
+
+        matchup1_results = []
+        matchup2_results = []
+
+        for (p1, p2) in matchups1:
+            course = 'The Oconee'
+            matchup_vs = p1 + ' vs ' + p2
+            try:
+                g1 = dct[p1]
+                g2 = dct[p2]
+                h1 = self.calc_handicap(p1, course)
+                h2 = self.calc_handicap(p2, course)
+
+                gets_strokes = 'equal'
+                if h1 > h2:
+                    diff = h1 - h2
+                    gets_strokes = 'team1'
+                elif h2 > h1:
+                    diff = h2 - h1
+                    gets_strokes = 'team2'
+
+                g1_scores = list(g1.scores[course].values())
+                g2_scores = list(g2.scores[course].values())
+
+                if g1_scores[17] > 0 and g2_scores[17] > 0: # only calculate if both golfers have finished
+                    team1_wins = 0
+                    team2_wins = 0
+
+                    course_hdcps = self.courses[course]['hdcps']
+
+                    for i, h in enumerate(course_hdcps):
+                        if gets_strokes == 'team1' and h <= diff:
+                            if g1_scores[i] - 1 < g2_scores[i]:
+                                team1_wins += 1
+                            elif g1_scores[i] - 1 > g2_scores[i]:
+                                team2_wins += 1
+                        elif gets_strokes == 'team2' and h <= diff:
+                            if g2_scores[i] - 1 < g1_scores[i]:
+                                team2_wins += 1
+                            elif g2_scores[i] - 1 > g1_scores[i]:
+                                team1_wins += 1
+                        else:
+                            if g1_scores[i] < g2_scores[i]:
+                                team1_wins += 1
+                            elif g1_scores[i] > g2_scores[i]:
+                                team2_wins += 1
+
+                        if (team1_wins - team2_wins) > 0 and (18 - (i+1)) < (team1_wins - team2_wins):
+                            team1_pts += 1
+                            if (team1_wins - team2_wins) == 1:
+                                result_str = '1 up'
+                            else:
+                                result_str = '{} and {}'.format(team1_wins - team2_wins, 18-(i+1))
+                            matchup_result = p1.split()[0] + ' wins: ' + result_str
+                            break
+                        elif (team2_wins - team1_wins) > 0 and (18 - (i+1)) < (team2_wins - team1_wins):
+                            team2_pts += 1
+                            if (team2_wins - team1_wins) == 1:
+                                result_str = '1 up'
+                            else:
+                                result_str = '{} and {}'.format(team2_wins - team1_wins, 18-(i+1))
+                            matchup_result = p2.split()[0] + ' wins: ' + result_str
+                            break
+                        elif (team1_wins - team2_wins) == 0 and (18 - (i+1)) == 0:
+                            team1_pts += 0.5
+                            team2_pts += 0.5
+                            result_str = 'halved'
+                            matchup_result = result_str
+                            break
+
+                matchup1_results.append((matchup_vs, matchup_result))
+            except:
+                matchup1_results.append((matchup_vs, 'TBD'))
+
+        for (p1, p2) in matchups2:
+            course = 'The Landing'
+            matchup_vs = p1 + ' vs ' + p2
+            try:
+                g1 = dct[p1]
+                g2 = dct[p2]
+                h1 = self.calc_handicap(p1, course)
+                h2 = self.calc_handicap(p2, course)
+
+                gets_strokes = 'equal'
+                if h1 > h2:
+                    diff = h1 - h2
+                    gets_strokes = 'team1'
+                elif h2 > h1:
+                    diff = h2 - h1
+                    gets_strokes = 'team2'
+
+                g1_scores = list(g1.scores[course].values())
+                g2_scores = list(g2.scores[course].values())
+
+                if g1_scores[17] > 0 and g2_scores[17] > 0: # only calculate if both golfers have finished
+                    team1_wins = 0
+                    team2_wins = 0
+                    course_hdcps = self.courses[course]['hdcps']
+                    for i, h in enumerate(course_hdcps):
+                        if gets_strokes == 'team1' and h <= diff:
+                            if g1_scores[i] - 1 < g2_scores[i]:
+                                team1_wins += 1
+                            elif g1_scores[i] - 1 > g2_scores[i]:
+                                team2_wins += 1
+                        elif gets_strokes == 'team2' and h <= diff:
+                            if g2_scores[i] - 1 < g1_scores[i]:
+                                team2_wins += 1
+                            elif g2_scores[i] - 1 > g1_scores[i]:
+                                team1_wins += 1
+                        else:
+                            if g1_scores[i] < g2_scores[i]:
+                                team1_wins += 1
+                            elif g1_scores[i] > g2_scores[i]:
+                                team2_wins += 1
+
+                        if (team1_wins - team2_wins) > 0 and (18 - (i+1)) < (team1_wins - team2_wins):
+                            team1_pts += 1
+                            if (team1_wins - team2_wins) == 1:
+                                result_str = '1 up'
+                            else:
+                                result_str = '{} and {}'.format(team1_wins - team2_wins, 18-(i+1))
+                            matchup_result = p1.split()[0] + ' wins: ' + result_str
+                            break
+                        elif (team2_wins - team1_wins) > 0 and (18 - (i+1)) < (team2_wins - team1_wins):
+                            team2_pts += 1
+                            if (team2_wins - team1_wins) == 1:
+                                result_str = '1 up'
+                            else:
+                                result_str = '{} and {}'.format(team2_wins - team1_wins, 18-(i+1))
+                            matchup_result = p2.split()[0] + ' wins: ' + result_str
+                            break
+                        elif (team1_wins - team2_wins) == 0 and (18 - (i+1)) == 0:
+                            team1_pts += 0.5
+                            team2_pts += 0.5
+                            result_str = 'halved'
+                            matchup_result = result_str
+                            break
+
+                matchup2_results.append((matchup_vs, matchup_result))
+            except:
+                matchup2_results.append((matchup_vs, 'TBD'))
+
+        df1 = pd.DataFrame(matchup1_results, columns=['Matchup', 'Result'])
+        df2 = pd.DataFrame(matchup2_results, columns=['Matchup', 'Result'])
+
+        if team1_pts + team2_pts == 12:
+            if team1_pts > team2_pts:
+                final_result_str = 'Team 1 Wins!'
+            elif team2_pts > team1_pts:
+                final_result_str = 'Team 2 Wins!'
+            else:
+                final_result_str = "It's a tie!"
+        elif team1_pts + team2_pts > 0:
+            final_result_str = 'In Progress'
+        else:
+            final_result_str = 'Play has yet to begin'
+
+        return df1, df2, team1_pts, team2_pts, final_result_str
+
+
 if __name__ == '__main__':
     # past_locations_map()
     golf = PlayGolf()
@@ -677,21 +866,23 @@ if __name__ == '__main__':
     tees = {
         'The National - Ridge/Bluff': 'One',
         # 'The National - Ridge/Cove': 'One',
-        # 'The National - Bluff/Cove': 'Two',
+        # 'The National - Bluff/Cove': 'One',
         # 'The National - Bluff/Ridge': 'One',
         # 'The National - Cove/Ridge': 'One',
-        # 'The National - Cove/Bluff': 'Two',
-        'The Oconee': 'Two',
-        'Great Waters': 'One',
+        # 'The National - Cove/Bluff': 'One',
+        'The Oconee': 'One',
+        'Great Waters': 'Golden Bear',
         'The Landing': 'One',
         'The Landing Replay': 'One',
-        'Great Waters Replay': 'One'
+        'Great Waters Replay': 'Golden Bear'
     }
 
-    golf.add_player('Stuart King', 3, tees, True)
+    golf.add_player('Stuart King', 2.4, tees, True)
+    golf.add_player('Alex King', 0.3, tees, True)
 
     print("Adding Stuart's scores...")
     for idx, _ in enumerate(range(18)):
         golf.add_score('Stuart King', 'The Oconee', idx+1, np.random.randint(3,7))
+    print("Adding Alex's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Stuart King', 'The Preserve', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'The Oconee', idx+1, np.random.randint(3,7))
