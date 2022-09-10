@@ -696,15 +696,15 @@ class PlayGolf(object):
                  ('Reggie Sherrill', 'Patrick Hannahan'),
                  ('Jeff Veness', 'Josh Duckett')]
 
-        team1_pts = 0
-        team2_pts = 0
+        team1_pts = 0.0
+        team2_pts = 0.0
 
         matchup1_results = []
         matchup2_results = []
 
         for (p1, p2) in matchups1:
             course = 'The Oconee'
-            matchup_vs = p1 + ' vs ' + p2
+            matchup_vs = p1.split()[0] + ' vs ' + p2.split()[0]
             try:
                 g1 = dct[p1]
                 g2 = dct[p2]
@@ -774,7 +774,7 @@ class PlayGolf(object):
 
         for (p1, p2) in matchups2:
             course = 'The Landing'
-            matchup_vs = p1 + ' vs ' + p2
+            matchup_vs = p1.split()[0] + ' vs ' + p2.split()[0]
             try:
                 g1 = dct[p1]
                 g2 = dct[p2]
@@ -843,7 +843,7 @@ class PlayGolf(object):
         df1 = pd.DataFrame(matchup1_results, columns=['Matchup', 'Result'])
         df2 = pd.DataFrame(matchup2_results, columns=['Matchup', 'Result'])
 
-        if team1_pts + team2_pts == 12:
+        if team1_pts + team2_pts == 12.0:
             if team1_pts > team2_pts:
                 final_result_str = 'Team 1 Wins!'
             elif team2_pts > team1_pts:
