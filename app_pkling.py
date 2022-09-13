@@ -251,10 +251,6 @@ def teams():
             msg = 'Teams not properly defined. Please try again.'
             return render_template('teams.html', players=players, msg=msg)
 
-        # if len(p1) != len(p2):
-        #     msg = 'Teams not properly defined. Please try again.'
-        #     return render_template('teams.html', players=players, msg=msg)
-
         golfers = list(zip(p1,p2))
         teams_df = golf.calc_teams(golfers, course)
         return render_template('teams_results.html', teams_df=teams_df.to_html(index=False), course=course)
@@ -262,6 +258,7 @@ def teams():
     return render_template('teams.html', players=players)
 
 
+# tees and handicaps page
 @app.route('/tees_handicaps', methods=['GET', 'POST'])
 def tees_handicaps():
     if request.method == 'POST':
