@@ -523,8 +523,8 @@ class PlayGolf(object):
         for (p1, p2) in teams:
             g1 = dct[p1]
             g2 = dct[p2]
-            s1 = g1.calc_course_score(course, net=True)
-            s2 = g2.calc_course_score(course, net=True)
+            s1 = g1.calc_course_score(course, net=True, only_score=True)
+            s2 = g2.calc_course_score(course, net=True, only_score=True)
             team_score = s1 + s2
             team_scores.append(team_score)
 
@@ -877,12 +877,136 @@ if __name__ == '__main__':
         'Great Waters Replay': 'Golden Bear'
     }
 
-    golf.add_player('Stuart King', 2.4, tees, True)
-    golf.add_player('Alex King', 0.3, tees, True)
+    tees_ = {
+        'The National - Ridge/Bluff': 'Two',
+        # 'The National - Ridge/Cove': 'One',
+        # 'The National - Bluff/Cove': 'One',
+        # 'The National - Bluff/Ridge': 'One',
+        # 'The National - Cove/Ridge': 'One',
+        # 'The National - Cove/Bluff': 'One',
+        'The Oconee': 'Two',
+        'Great Waters': 'One/Two',
+        'The Landing': 'Tournament',
+        'The Landing Replay': 'Tournament',
+        'Great Waters Replay': 'One/Two'
+    }
 
+    golf.add_player('Stuart King', 2.4, tees, True)
     print("Adding Stuart's scores...")
     for idx, _ in enumerate(range(18)):
+        golf.add_score('Stuart King', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,7))
         golf.add_score('Stuart King', 'The Oconee', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Great Waters', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'The Landing', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'The Landing Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Great Waters Replay', idx+1, np.random.randint(3,7))
+
+    golf.add_player('Alex King', 0.3, tees, True)
     print("Adding Alex's scores...")
     for idx, _ in enumerate(range(18)):
+        golf.add_score('Alex King', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,7))
         golf.add_score('Alex King', 'The Oconee', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Great Waters', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'The Landing', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'The Landing Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Great Waters Replay', idx+1, np.random.randint(3,7))
+
+    golf.add_player('Jerry King', 9.5, tees_, True)
+    print("Adding Jerry's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Jerry King', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Reggie Sherrill', 8.0, tees_, True)
+    print("Adding Reggie's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Reggie Sherrill', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Jeff Veness', 13.6, tees_, True)
+    print("Adding Jeff's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Jeff Veness', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Jeff Veness', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Jeff Veness', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Jeff Veness', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Jeff Veness', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Jeff Veness', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Patrick Hannahan', 8.6, tees, True)
+    print("Adding Patrick's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Patrick Hannahan', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Andy Tapper', 2.1, tees, True)
+    print("Adding Andy's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Andy Tapper', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,7))
+        golf.add_score('Andy Tapper', 'The Oconee', idx+1, np.random.randint(3,7))
+        golf.add_score('Andy Tapper', 'Great Waters', idx+1, np.random.randint(3,7))
+        golf.add_score('Andy Tapper', 'The Landing', idx+1, np.random.randint(3,7))
+        golf.add_score('Andy Tapper', 'The Landing Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Andy Tapper', 'Great Waters Replay', idx+1, np.random.randint(3,7))
+
+    golf.add_player('Zach Taylor', 5.8, tees_, True)
+    print("Adding Zach's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Zach Taylor', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Josh Duckett', 13.2, tees_, True)
+    print("Adding Josh's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Josh Duckett', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Josh Duckett', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Josh Duckett', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Josh Duckett', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Josh Duckett', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Josh Duckett', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Bobby Jovanov', 10.7, tees, True)
+    print("Adding Bobby's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Bobby Jovanov', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Bobby Jovanov', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Bobby Jovanov', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Bobby Jovanov', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Bobby Jovanov', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Bobby Jovanov', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Chris Marsh', 14.1, tees_, True)
+    print("Adding Chris's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Chris Marsh', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Great Waters Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Rob Matiko', 12.0, tees_, True)
+    print("Adding Rob's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Rob Matiko', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'The Oconee', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Great Waters', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'The Landing', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'The Landing Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Great Waters Replay', idx+1, np.random.randint(3,8))
