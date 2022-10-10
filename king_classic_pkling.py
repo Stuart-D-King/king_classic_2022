@@ -434,7 +434,16 @@ class PlayGolf(object):
             total = 0
             tp = 0
             tr = 0
-            for course in golfer.scores.keys():
+            # for course in golfer.scores.keys():
+            for course in ['The National - Ridge/Bluff',
+                    # 'The National - Ridge/Cove',
+                    # 'The National - Bluff/Cove',
+                    # 'The National - Bluff/Ridge',
+                    # 'The National - Cove/Ridge',
+                    # 'The National - Cove/Bluff',
+                    'Great Waters',
+                    'The Landing Replay',
+                    'Great Waters Replay']:
                 score, p, hp = golfer.calc_course_score(course, net)
                 total += score
                 tp += p
