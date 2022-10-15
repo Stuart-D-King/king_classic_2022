@@ -435,11 +435,12 @@ class PlayGolf(object):
             tp = 0
             tr = 0
             # for course in golfer.scores.keys():
-            for course in ['The National - Ridge/Bluff',
+            for course in [
+                    # 'The National - Ridge/Bluff',
                     # 'The National - Ridge/Cove',
                     # 'The National - Bluff/Cove',
                     # 'The National - Bluff/Ridge',
-                    # 'The National - Cove/Ridge',
+                    'The National - Cove/Ridge',
                     # 'The National - Cove/Bluff',
                     'Great Waters',
                     'The Landing Replay',
@@ -873,11 +874,11 @@ if __name__ == '__main__':
 
     print('Adding players...')
     tees = {
-        'The National - Ridge/Bluff': 'One',
+        # 'The National - Ridge/Bluff': 'One',
         # 'The National - Ridge/Cove': 'One',
         # 'The National - Bluff/Cove': 'One',
         # 'The National - Bluff/Ridge': 'One',
-        # 'The National - Cove/Ridge': 'One',
+        'The National - Cove/Ridge': 'One',
         # 'The National - Cove/Bluff': 'One',
         'The Oconee': 'One',
         'Great Waters': 'Golden Bear',
@@ -887,11 +888,11 @@ if __name__ == '__main__':
     }
 
     tees_ = {
-        'The National - Ridge/Bluff': 'Two',
+        # 'The National - Ridge/Bluff': 'Two',
         # 'The National - Ridge/Cove': 'One',
         # 'The National - Bluff/Cove': 'One',
         # 'The National - Bluff/Ridge': 'One',
-        # 'The National - Cove/Ridge': 'One',
+        'The National - Cove/Ridge': 'One',
         # 'The National - Cove/Bluff': 'One',
         'The Oconee': 'Two',
         'Great Waters': 'One/Two',
@@ -903,7 +904,7 @@ if __name__ == '__main__':
     golf.add_player('Stuart King', 2.4, tees, True)
     print("Adding Stuart's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Stuart King', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'The National - Cove/Ridge', idx+1, np.random.randint(3,7))
         golf.add_score('Stuart King', 'The Oconee', idx+1, np.random.randint(3,7))
         golf.add_score('Stuart King', 'Great Waters', idx+1, np.random.randint(3,7))
         golf.add_score('Stuart King', 'The Landing', idx+1, np.random.randint(3,7))
@@ -913,7 +914,7 @@ if __name__ == '__main__':
     golf.add_player('Alex King', 0.3, tees, True)
     print("Adding Alex's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Alex King', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'The National - Cove/Ridge', idx+1, np.random.randint(3,7))
         golf.add_score('Alex King', 'The Oconee', idx+1, np.random.randint(3,7))
         golf.add_score('Alex King', 'Great Waters', idx+1, np.random.randint(3,7))
         golf.add_score('Alex King', 'The Landing', idx+1, np.random.randint(3,7))
@@ -923,7 +924,7 @@ if __name__ == '__main__':
     golf.add_player('Jerry King', 9.5, tees_, True)
     print("Adding Jerry's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Jerry King', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Jerry King', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Jerry King', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Jerry King', 'The Landing', idx+1, np.random.randint(3,8))
@@ -933,7 +934,7 @@ if __name__ == '__main__':
     golf.add_player('Reggie Sherrill', 8.0, tees_, True)
     print("Adding Reggie's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Reggie Sherrill', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Reggie Sherrill', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Reggie Sherrill', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Reggie Sherrill', 'The Landing', idx+1, np.random.randint(3,8))
@@ -943,7 +944,7 @@ if __name__ == '__main__':
     golf.add_player('Jeff Veness', 13.6, tees_, True)
     print("Adding Jeff's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Jeff Veness', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Jeff Veness', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Jeff Veness', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Jeff Veness', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Jeff Veness', 'The Landing', idx+1, np.random.randint(3,8))
@@ -953,7 +954,7 @@ if __name__ == '__main__':
     golf.add_player('Patrick Hannahan', 8.6, tees, True)
     print("Adding Patrick's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Patrick Hannahan', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Patrick Hannahan', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Patrick Hannahan', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Patrick Hannahan', 'The Landing', idx+1, np.random.randint(3,8))
@@ -963,7 +964,7 @@ if __name__ == '__main__':
     golf.add_player('Andy Tapper', 2.1, tees, True)
     print("Adding Andy's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Andy Tapper', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,7))
+        golf.add_score('Andy Tapper', 'The National - Cove/Ridge', idx+1, np.random.randint(3,7))
         golf.add_score('Andy Tapper', 'The Oconee', idx+1, np.random.randint(3,7))
         golf.add_score('Andy Tapper', 'Great Waters', idx+1, np.random.randint(3,7))
         golf.add_score('Andy Tapper', 'The Landing', idx+1, np.random.randint(3,7))
@@ -973,7 +974,7 @@ if __name__ == '__main__':
     golf.add_player('Zach Taylor', 5.8, tees_, True)
     print("Adding Zach's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Zach Taylor', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Zach Taylor', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Zach Taylor', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Zach Taylor', 'The Landing', idx+1, np.random.randint(3,8))
@@ -983,7 +984,7 @@ if __name__ == '__main__':
     golf.add_player('Josh Duckett', 13.2, tees_, True)
     print("Adding Josh's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Josh Duckett', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Josh Duckett', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Josh Duckett', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Josh Duckett', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Josh Duckett', 'The Landing', idx+1, np.random.randint(3,8))
@@ -993,7 +994,7 @@ if __name__ == '__main__':
     golf.add_player('Bobby Jovanov', 10.7, tees, True)
     print("Adding Bobby's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Bobby Jovanov', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Bobby Jovanov', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Bobby Jovanov', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Bobby Jovanov', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Bobby Jovanov', 'The Landing', idx+1, np.random.randint(3,8))
@@ -1003,7 +1004,7 @@ if __name__ == '__main__':
     golf.add_player('Chris Marsh', 14.1, tees_, True)
     print("Adding Chris's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Chris Marsh', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Chris Marsh', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Chris Marsh', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Chris Marsh', 'The Landing', idx+1, np.random.randint(3,8))
@@ -1013,7 +1014,7 @@ if __name__ == '__main__':
     golf.add_player('Rob Matiko', 12.0, tees_, True)
     print("Adding Rob's scores...")
     for idx, _ in enumerate(range(18)):
-        golf.add_score('Rob Matiko', 'The National - Ridge/Bluff', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'The National - Cove/Ridge', idx+1, np.random.randint(3,8))
         golf.add_score('Rob Matiko', 'The Oconee', idx+1, np.random.randint(3,8))
         golf.add_score('Rob Matiko', 'Great Waters', idx+1, np.random.randint(3,8))
         golf.add_score('Rob Matiko', 'The Landing', idx+1, np.random.randint(3,8))
