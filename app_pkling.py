@@ -56,14 +56,24 @@ def add_player():
         tee4 = request.form['tee4']
         tee5 = request.form['tee5']
         tee6 = request.form['tee6']
+        tee7 = request.form['tee7']
+        tee8 = request.form['tee8']
+        tee9 = request.form['tee9']
+        tee10 = request.form['tee10']
+        tee11 = request.form['tee11']
 
         tees = {
-            'The National - Ridge/Bluff': tee1, # NEEDS TO BE UPDATED
-            'The Oconee': tee2,
-            'Great Waters': tee3,
-            'The Landing': tee4,
-            'The Landing Replay': tee5,
-            'Great Waters Replay': tee6
+            'The National - Ridge/Bluff': tee1,
+            'The National - Ridge/Cove': tee2,
+            'The National - Bluff/Ridge': tee3,
+            'The National - Bluff/Cove': tee4,
+            'The National - Cove/Bluff': tee5,
+            'The National - Cove/Ridge': tee6,
+            'The Oconee': tee7,
+            'Great Waters': tee8,
+            'The Landing': tee9,
+            'The Landing Replay': tee10,
+            'Great Waters Replay': tee11
         }
         # skins = request.form['in_skins']
         # if skins == 'True':
