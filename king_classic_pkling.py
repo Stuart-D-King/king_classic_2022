@@ -713,7 +713,7 @@ class PlayGolf(object):
         matchup2_results = []
 
         for (p1, p2) in matchups1:
-            course = 'The Oconee'
+            course = 'The National - Cove/Ridge'
             matchup_vs = p1.split()[0] + ' vs ' + p2.split()[0]
             try:
                 g1 = dct[p1]
@@ -737,6 +737,11 @@ class PlayGolf(object):
                     team2_wins = 0
 
                     course_hdcps = self.courses[course]['hdcps']
+                    s1 = course_hdcps[:9] # odd stroke differences mean golfer gets more strokes on front side since each nine has the same 1-9 handicaps
+                    s1 = [x*2-1 for x in s1]
+                    s2 = course_hadcs[9:]
+                    s2 = [x*2 for x in s2]
+                    course_hdcps = s1 + s2
 
                     for i, h in enumerate(course_hdcps):
                         if gets_strokes == 'team1' and h <= diff:
