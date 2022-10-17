@@ -440,8 +440,9 @@ class PlayGolf(object):
                     # 'The National - Ridge/Cove',
                     # 'The National - Bluff/Cove',
                     # 'The National - Bluff/Ridge',
-                    'The National - Cove/Ridge',
+                    # 'The National - Cove/Ridge',
                     # 'The National - Cove/Bluff',
+                    'The Oconee',
                     'Great Waters',
                     'The Landing Replay',
                     'Great Waters Replay']:
