@@ -740,7 +740,7 @@ class PlayGolf(object):
                     course_hdcps = self.courses[course]['hdcps']
                     s1 = course_hdcps[:9] # odd stroke differences mean golfer gets more strokes on front side since each nine has the same 1-9 handicaps
                     s1 = [x*2-1 for x in s1]
-                    s2 = course_hadcs[9:]
+                    s2 = course_hdcps[9:]
                     s2 = [x*2 for x in s2]
                     course_hdcps = s1 + s2
 
@@ -763,16 +763,16 @@ class PlayGolf(object):
 
                         if (team1_wins - team2_wins) > 0 and (18 - (i+1)) < (team1_wins - team2_wins):
                             team1_pts += 1
-                            if (team1_wins - team2_wins) == 1:
-                                result_str = '1 up'
+                            if 18 - (i+1) == 0:
+                                result_str = '{} up'.format(team1_wins - team2_wins)
                             else:
                                 result_str = '{} and {}'.format(team1_wins - team2_wins, 18-(i+1))
                             matchup_result = p1.split()[0] + ' wins: ' + result_str
                             break
                         elif (team2_wins - team1_wins) > 0 and (18 - (i+1)) < (team2_wins - team1_wins):
                             team2_pts += 1
-                            if (team2_wins - team1_wins) == 1:
-                                result_str = '1 up'
+                            if 18 - (i+1) == 0:
+                                result_str = '{} up'.format(team2_wins - team1_wins)
                             else:
                                 result_str = '{} and {}'.format(team2_wins - team1_wins, 18-(i+1))
                             matchup_result = p2.split()[0] + ' wins: ' + result_str
@@ -831,16 +831,16 @@ class PlayGolf(object):
 
                         if (team1_wins - team2_wins) > 0 and (18 - (i+1)) < (team1_wins - team2_wins):
                             team1_pts += 1
-                            if (team1_wins - team2_wins) == 1:
-                                result_str = '1 up'
+                            if 18 - (i+1) == 0:
+                                result_str = '{} up'.format(team1_wins - team2_wins)
                             else:
                                 result_str = '{} and {}'.format(team1_wins - team2_wins, 18-(i+1))
                             matchup_result = p1.split()[0] + ' wins: ' + result_str
                             break
                         elif (team2_wins - team1_wins) > 0 and (18 - (i+1)) < (team2_wins - team1_wins):
                             team2_pts += 1
-                            if (team2_wins - team1_wins) == 1:
-                                result_str = '1 up'
+                            if 18 - (i+1) == 0:
+                                result_str = '{} up'.format(team2_wins - team1_wins)
                             else:
                                 result_str = '{} and {}'.format(team2_wins - team1_wins, 18-(i+1))
                             matchup_result = p2.split()[0] + ' wins: ' + result_str
